@@ -22,9 +22,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    enviroment:
+    environment:
       name: github-pages
-      utl: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to Github Pages
         id: deployment
