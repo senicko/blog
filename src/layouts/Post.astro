@@ -1,0 +1,37 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Center from "../components/Center.astro";
+import PostHeader from "../components/PostHeader.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    publishedDate: string;
+    updatedDate?: string;
+  };
+}
+
+const { title, description, publishedDate, updatedDate } =
+  Astro.props.frontmatter;
+---
+
+<html>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Center>
+      <main class="max-w-screen-md">
+        <article class="flex flex-col gap-8">
+          <PostHeader title={title} publishedDate={publishedDate} />
+          <div
+            class="prose max-w-none prose-zinc prose-pre:p-4 prose-pre:w-full prose-pre:leading-normal"
+          >
+            <slot />
+          </div>
+        </article>
+      </main>
+    </Center>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import PostPreview from "../components/PostPreview.astro";
+import Center from "../components/Center.astro";
+import type { Props as PostProps } from "../layouts/Post.astro";
+
+const posts = await Astro.glob<PostProps & { url: string }>(
+  "./posts/*.{md,mdx}"
+);
+---
+
+<html>
+  <head>
+    <BaseHead title="Home Page" description="Cool blog" />
+  </head>
+  <body>
+    <Center>
+      <main>
+        <ul>
+          {
+            posts.map((post) => (
+              <li>
+                <PostPreview
+                  url={post.url}
+                  title={post.frontmatter.title}
+                  publishedDate={post.frontmatter.publishedDate}
+                />
+              </li>
+            ))
+          }
+        </ul>
+      </main>
+    </Center>
+  </body>
+</html>
